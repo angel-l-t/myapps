@@ -82,6 +82,8 @@ function getTotal () {
 window.onload = () => {
     if (localStorage.getItem("productsList") == null) {
         products = {};
+        loadProducts();
+        getTotal();
     } else {
         let deserialProducts = JSON.parse(localStorage.getItem("productsList"));
         products = deserialProducts;
