@@ -80,10 +80,14 @@ function getTotal () {
 
 // Event Listeners
 window.onload = () => {
-    let deserialProducts = JSON.parse(localStorage.getItem("productsList"));
-    products = deserialProducts;
-    loadProducts();
-    getTotal();
+    if (localStorage.getItem("productsList") == null) {
+        products = {};
+    } else {
+        let deserialProducts = JSON.parse(localStorage.getItem("productsList"));
+        products = deserialProducts;
+        loadProducts();
+        getTotal();
+    }
 }
 product.addEventListener("keypress", function (e) {if (e.key === 'Enter') {addProducts();} } );
 quantity.addEventListener("keypress", function (e) {if (e.key === 'Enter') {addProducts();} } );
