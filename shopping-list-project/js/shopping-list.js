@@ -14,12 +14,8 @@ function addProducts() {
     if (product.value == "") {
         alert("Please, write a product name!");
     } else {
-        console.log(products);
-        console.log(product.value);
-        console.log(quantity.value);
-        console.log(price.value);
         products[product.value] = {quantity: quantity.value, price: price.value};
-        console.log(products);
+        
         loadProducts();
 
         let serialProducts = JSON.stringify(products)
