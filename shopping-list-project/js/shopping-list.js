@@ -71,8 +71,10 @@ function getTotal () {
 
     for (let productItem in products) {
         let oneTotal = products[productItem].quantity * products[productItem].price;
-        total += oneTotal
+        total = total + oneTotal;
     }
+
+    total = total.toFixed(2);
 
     outputTotal1.innerHTML = total;
     outputTotal2.innerHTML = total;
