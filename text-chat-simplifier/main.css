@@ -1,0 +1,35 @@
+body {
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-color: #cedae7;
+}
+
+section {
+    background-color: #00ef9f;
+    border-radius: 30px;
+}
+
+textarea {
+    display: block;
+    min-width: 350px;
+    min-height: 300px;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #bafae5;
+    font-family: sans-serif;
+}
+
+.chat-input {
+    max-width: 400px;
+    margin: 1rem auto;
+    padding: 2rem;
+}
+
+.only-button {
+    margin-left: 50px;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+}
