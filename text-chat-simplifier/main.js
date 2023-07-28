@@ -9,7 +9,7 @@ changeButton.addEventListener("click", () => {
     text = originalText.value.trim();
 
     // Text into array
-    var paragraphs = text.split(/(\[[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9] [pa]\. m\.\] .*: )/g);
+    var paragraphs = text.split(/(\[[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9] [pa]\. m\.\] [^:]*: )/g);
     
     //Array for input
     var newParagraphs = "";
@@ -29,6 +29,7 @@ changeButton.addEventListener("click", () => {
             
             if (currentName == splitDateAndName[2]) {
                 lastTime = paragraph.substring(12, 17);
+                lastTimeFormat = paragraph.substring(18, 23);
                 repeated = true;
                 paragraphs.splice(i, 1);
             } else {
@@ -37,32 +38,37 @@ changeButton.addEventListener("click", () => {
                     var text = paragraphs[lastTimeStampt]
                     var index = 22;
 
-                    if (lastTimeFormat == "p. m." && text.substring(22, 24) != "12") {
-                        lastTime = `${parseInt(lastTime) + 12}`;
-                    } else if (lastTimeFormat == "a. m." && text.substring(22, 24) == "12") {
-                        lastTime = "00";
+                    if (lastTimeFormat == "p. m." && `${parseInt(lastTime)}` != "12") {
+                        var minutes = lastTime.substring(3);
+                        lastTime = `${parseInt(lastTime) + 12}:${minutes}`;
+                    } else if (lastTimeFormat == "a. m." && `${parseInt(lastTime)}` == "12") {
+                        var minutes = lastTime.substring(3);
+                        lastTime = `00:${minutes}`;
                     }
 
                     paragraphs[lastTimeStampt] = text.substring(0, index) + lastTime + text.substring(index + lastTime.length);
                     repeated = false;
                 }
                 
-                if (paragraph.substring(18, 23) == "p. m." && paragraph.substring(12, 14) != "12") {
-                    var insert = parseInt(paragraph.substring(12, 14)) + 12;
-                    insert = `${insert}`;
-                    var text = paragraph
-                    var index = 12;
+                if (paragraph.substring(18, 23) == "p. m.") {
+                    if (paragraph.substring(12, 14) != "12") {
+                        var insert = parseInt(paragraph.substring(12, 14)) + 12;
+                        insert = `${insert}`;
+                        var text = paragraph
+                        var index = 12;
 
-                    paragraph = text.substring(0, index) + insert + text.substring(index + insert.length);
-                    
+                        paragraph = text.substring(0, index) + insert + text.substring(index + insert.length);
+                    }
                     lastTimeFormat = "p. m.";
-                } else if (paragraph.substring(18, 23) == "a. m." && paragraph.substring(12, 14) == "12") {
-                    var insert = "00";
+                } else if (paragraph.substring(18, 23) == "a. m.") {
+                    if (paragraph.substring(12, 14) == "12") {
+                        var minutes = `${paragraph.substring(16, 18)}`;
+                        var insert = `00:${minutes}`;
 
-                    var text = paragraph
-                    var index = 12;
-                    paragraph = text.substring(0, index) + insert + text.substring(index + insert.length);
-
+                        var text = paragraph
+                        var index = 12;
+                        paragraph = text.substring(0, index) + insert + text.substring(index + insert.length);
+                    }
                     lastTimeFormat = "a. m.";
                 }
 
@@ -85,12 +91,7 @@ changeButton.addEventListener("click", () => {
                 index = 4;
                 paragraph = text.substring(0, index) + day + text.substring(index + day.length);
 
-
-                //if () {}
-
-                //console.log(paragraph.substring(18, 23));
-                //console.log(parseInt("09"));
-                paragraphs[i] = "\nWhatsApp " + paragraph.replace("[", "<").replace("]", ">").replace(" : ", " Me").replace(" a. m.", "").replace(" p. m.", "") + "\n";
+                paragraphs[i] = "\nWhatsApp " + paragraph.replace("[", "<").replace("]", ">").replace("> : ", "> Me").replace(" a. m.", "").replace(" p. m.", "") + "\n";
 
                 currentName = splitDateAndName[2];
                 lastTimeStampt = i;
