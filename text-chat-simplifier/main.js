@@ -91,7 +91,7 @@ changeButton.addEventListener("click", () => {
                 index = 4;
                 paragraph = text.substring(0, index) + day + text.substring(index + day.length);
 
-                paragraphs[i] = "\nWhatsApp " + paragraph.replace("[", "<").replace("]", ">").replace("> : ", "> Me").replace(" a. m.", "").replace(" p. m.", "") + "\n";
+                paragraphs[i] = "\nWhatsApp " + paragraph.replace("[", "<").replace("]", ">").replace("> : ", "> Mentor").replace(" a. m.", "").replace(" p. m.", "") + "\n";
 
                 currentName = splitDateAndName[2];
                 lastTimeStampt = i;
