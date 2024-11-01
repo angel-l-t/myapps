@@ -18,7 +18,7 @@ changeButton.addEventListener("click", () => {
     // Text in input
     text = originalText.value.trim();
 
-    outputText.innerHTML = text.replaceAll("m.] :", `m.] ${mentorName}:`).trim();
+    outputText.innerHTML = text.replaceAll(/m.\] :|m.\] \+[0-9 ]+:/g, `m.] ${mentorName}:`).trim();
 });
 
 mentorButton.addEventListener("click", () => {
