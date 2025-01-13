@@ -42,7 +42,7 @@ section {
 
 input {
     margin: 0 0.5rem 0 0.5rem;
-    max-width: 7rem;
+    max-width: 10rem;
 }
 
 #inputs {
@@ -95,5 +95,5 @@ li button {
 }
 
 li:nth-child(1) {
-    padding-top: 9rem;
+    padding-top: 11rem;
 }
