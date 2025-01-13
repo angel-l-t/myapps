@@ -11,10 +11,10 @@ let inputs = document.getElementById("inputs");
 
 // Adding products to the list.
 function addProducts() {
-    if (product.value == "") {
+    if (product.value.trim() == "") {
         alert("Please, write a product name!");
     } else {
-        products[product.value] = {quantity: quantity.value, price: price.value};
+        products[product.value.trim()] = {quantity: quantity.value.trim(), price: price.value.trim()};
         
         loadProducts();
 
